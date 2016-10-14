@@ -8,15 +8,10 @@
 
 #pragma once
 
-enum Color {
-    WHITE,
-    RED
-};
-
 
 class Cell{
 public:
     Cell();
-    Color color;
+    bool isColored;
     bool hasAnt;
 };
