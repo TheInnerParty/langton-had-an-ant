@@ -64,7 +64,7 @@ Grid::Ant Grid::goRight(Ant ant) {
 }
 Grid::update(){
     for(auto&& a : ants){
-        if (std::get<1>(a)->color){
+        if (std::get<1>(a)->isColored){
             //left
             std::get<0>(a) = turnLeft(get<0>(a));
         } else {
@@ -72,7 +72,7 @@ Grid::update(){
             std::get<0>(a) = turnRight(get<0>(a));
         }
         //flip color of square
-        std::get<1>->color = ! std::get<1>->color;
+        std::get<1>(a)->isColored = ! std::get<1>(a)->isColored;
         //move in that direction
         try {
             switch(get<0>(a){
