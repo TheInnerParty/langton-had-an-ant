@@ -9,6 +9,6 @@
 #include "cell.hpp"
 
 Cell::Cell(){
-    color = WHITE;
+    isColored = false;
     hasAnt = false;
 }
