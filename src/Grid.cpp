@@ -9,5 +9,7 @@
 #include "Grid.hpp"
 
 Grid::Grid() {
-	cells.assign(width*height, Cell())
+	cells.assign(width*height, Cell());
+	Ant ant;
+	
 }

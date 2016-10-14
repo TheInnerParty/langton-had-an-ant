@@ -8,4 +8,14 @@
 
 #pragma once
 
+#include <exception>
+
+
+class OutofBounds: public std::exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Reached Edge of Cell";
+	}
+} ;
 
