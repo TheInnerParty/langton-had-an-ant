@@ -35,7 +35,6 @@ class Grid {
 	
 	
 public:
-	Grid();
 	Grid(int width = 50, int height = 50);
 	void update();
 	void draw();
