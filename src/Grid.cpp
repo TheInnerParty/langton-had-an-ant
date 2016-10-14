@@ -20,11 +20,12 @@ Grid::Grid(int width, int height) {
 
 Grid::Ant Grid::goUp(Ant ant) {
 	int index = std::get<1>(ant)- cells.begin();
-	
 	if (index < width) {
 		throw outofBounds;
 	} else {
+        std::get<1>(ant)->hasAnt = false;
 		std::get<1>(ant) -= width;
+        std::get<1>(ant)->hasAnt = true;
 	}
 	return ant;
 	
@@ -35,7 +36,9 @@ Grid::Ant Grid::goDown(Ant ant) {
 	if (index > width * (height - 1)) {
 		throw outofBounds;
 	} else {
+        std::get<1>(ant)->hasAnt = false;
 		std::get<1>(ant) += width;
+        std::get<1>(ant)->hasAnt = true;
 		
 	}
 	return ant;
@@ -46,7 +49,9 @@ Grid::Ant Grid::goLeft(Ant ant) {
 	if ((index % width) == 0) {
 		throw outofBounds;
 	} else {
+        std::get<1>(ant)->hasAnt = false;
 		std::get<1>(ant)--;
+        std::get<1>(ant)->hasAnt = true;
 	}
 	return ant;
 	
@@ -57,7 +62,9 @@ Grid::Ant Grid::goRight(Ant ant) {
 	if (((index + 1) % width) == 0) {
 		throw outofBounds;
 	} else {
+        std::get<1>(ant)->hasAnt = false;
 		std::get<1>(ant)++;
+        std::get<1>(ant)->hasAnt = true;
 	}
 	return ant;
 	
@@ -72,7 +79,7 @@ void Grid::update(){
             std::get<0>(a) = turnRight(std::get<0>(a));
         }
         //flip color of square
-        std::get<1>(a)->isColored = ! std::get<1>(a)->isColored;
+        std::get<1>(a)->isColored =! std::get<1>(a)->isColored;
         //move in that direction
         try {
             switch(std::get<0>(a)){
