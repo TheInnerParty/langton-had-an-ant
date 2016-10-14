@@ -74,20 +74,25 @@ Grid::update(){
         //flip color of square
         get<1>->color = ! get<1>->color;
         //move in that direction
-        switch(get<0>(a){
+        try {
+            switch(get<0>(a){
             case LEFT;
-                get<1>(a) = get<1>(goLeft(a));
+                goLeft(a);
                 break;
             case UP;
-                get<1>(a) = get<1>(goUp(a));
+                goUp(a);
                 break;
             case RIGHT;
-                get<1>(a) = get<1>(goRight(a));
+                goRight(a);
                 break;
             case DOWN;
-                get<1>(a) = get<1>(goDown(a));
+                goDown(a);
                 break;
+            }
+        } catch (OutofBounds){
+            get<1>(a)->hasAnt = false;
         }
+        
         
     }
 }
