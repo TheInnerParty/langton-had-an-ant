@@ -9,17 +9,31 @@
 #pragma once
 
 #include <vector>
+#include <tuple>
 #include "cell.hpp"
+enum Direction {LEFT, RIGHT, UP, DOWN};
 
 class Grid {
 	std::vector<Cell> cells;
 	
-	std::vector<std::vector<Cell>::iterator> ants;
+	typedef std::tuple<Direction, std::vector<Cell>::iterator> Ant;
 	
+	std::vector<Ant> ants;
+	
+	
+	int width; // Number of Cells
+	int height;
+	
+	Ant goUp(Ant ant);
+	Ant goDown(Ant ant);
+	Ant goLeft(Ant ant);
+	Ant goRight(Ant ant);
 	
 	
 	
 public:
+	Grid();
+	Grid(int width = 50, int height = 50);
 	void update();
 	void draw();
 };

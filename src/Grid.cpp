@@ -7,3 +7,7 @@
 //
 
 #include "Grid.hpp"
+
+Grid::Grid() {
+	cells.assign(width*height, Cell())
+}
