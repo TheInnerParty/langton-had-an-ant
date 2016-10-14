@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Grid.hpp"
 
 class ofApp : public ofBaseApp{
 

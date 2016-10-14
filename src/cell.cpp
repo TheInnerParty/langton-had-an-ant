@@ -8,7 +8,7 @@
 
 #include "cell.hpp"
 
-Cell::Cell(){
-    isColored = false;
-    hasAnt = false;
+Cell::Cell() {
+	isColored = false;
+	hasAnt = false;
 }

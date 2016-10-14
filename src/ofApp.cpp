@@ -6,7 +6,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if( (ofGetFrameNum()>ofGetFrameRate()) && (ofGetFrameNum() % ofGetFrameRate() == 0)){
+    if(true){
          grid.update();
     }
 }

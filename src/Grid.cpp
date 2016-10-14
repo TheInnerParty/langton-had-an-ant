@@ -62,44 +62,57 @@ Grid::Ant Grid::goRight(Ant ant) {
 	return ant;
 	
 }
-Grid::update(){
+void Grid::update(){
     for(auto&& a : ants){
         if (std::get<1>(a)->isColored){
             //left
-            std::get<0>(a) = turnLeft(get<0>(a));
+			std::get<0>(a) = turnLeft(std::get<0>(a));
         } else {
             //right
-            std::get<0>(a) = turnRight(get<0>(a));
+            std::get<0>(a) = turnRight(std::get<0>(a));
         }
         //flip color of square
         std::get<1>(a)->isColored = ! std::get<1>(a)->isColored;
         //move in that direction
         try {
-            switch(get<0>(a){
-            case LEFT;
+            switch(std::get<0>(a)){
+			case LEFT:
                 goLeft(a);
                 break;
-            case UP;
+			case UP:
                 goUp(a);
                 break;
-            case RIGHT;
+			case RIGHT:
                 goRight(a);
                 break;
-            case DOWN;
+			case DOWN:
                 goDown(a);
                 break;
             }
         } catch (OutofBounds){
-            get<1>(a)->hasAnt = false;
+            std::get<1>(a)->hasAnt = false;
         }
         
         
     }
 }
 
-Grid::turnRight(Direction d){
-    return (d != DOWN)? d++ : LEFT;
+Direction Grid::turnRight(Direction d){
+	switch(d) {
+		case LEFT:
+			return UP;
+			break;
+		case UP:
+			return RIGHT;
+			break;
+		case RIGHT:
+			return DOWN;
+			break;
+		case DOWN:
+			return LEFT;
+			break;
+	}
 }
-GRID::turnLeft(Direction d){
-    return (d != LEFT)? d-- : DOWN;
+Direction Grid::turnLeft(Direction d){
+	return turnRight(turnRight(turnRight(d)));
 }
