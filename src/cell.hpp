@@ -6,9 +6,17 @@
 //
 //
 
-#ifndef cell_hpp
-#define cell_hpp
+#pragma once
 
-#include <stdio.h>
+enum Color {
+    WHITE,
+    RED
+};
 
-#endif /* cell_hpp */
+
+class Cell{
+public:
+    Cell();
+    Color color;
+    bool hasAnt;
+};

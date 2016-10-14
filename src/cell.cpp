@@ -7,3 +7,8 @@
 //
 
 #include "cell.hpp"
+
+Cell::cell(){
+    color = WHITE;
+    hasAnt = false;
+}
