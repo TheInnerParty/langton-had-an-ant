@@ -12,9 +12,12 @@
 #include <tuple>
 #include "cell.hpp"
 #include "OutofBoundsException.hpp"
-enum Direction {LEFT, UP, RIGHT, DOWN};
+
 
 class Grid {
+	
+	enum Direction {LEFT, UP, RIGHT, DOWN};
+	
 	std::vector<Cell> cells;
 	
 	typedef std::tuple<Direction, std::vector<Cell>::iterator> Ant;
@@ -22,13 +25,12 @@ class Grid {
 	std::vector<Ant> ants;
 	
 	
-	int width; // Number of Cells
-	int height;
 	
-	Ant goUp(Ant ant);
-	Ant goDown(Ant ant);
-	Ant goLeft(Ant ant);
-	Ant goRight(Ant ant);
+	
+	void goUp(Ant& ant);
+	void goDown(Ant& ant);
+	void goLeft(Ant& ant);
+	void goRight(Ant& ant);
     
     Direction turnRight(Direction d);
     Direction turnLeft(Direction d);
@@ -40,5 +42,8 @@ class Grid {
 public:
 	Grid(int width = 50, int height = 50);
 	void update();
-	void draw();
+	bool getBoxColored(int x, int y);
+	
+	int width; // Number of Cells
+	int height;
 };

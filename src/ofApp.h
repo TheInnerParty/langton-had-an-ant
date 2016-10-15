@@ -1,6 +1,13 @@
+/*
+ This project was created by Leo Dastur (@theinnerparty) and Samir Ghosh (@samirgauche).
+ */
+
+
+
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "Grid.hpp"
 
 class ofApp : public ofBaseApp{
@@ -21,6 +28,20 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-        Grid grid;
+	
+	void drawBox(int x, int y, bool colored);
+	void toggleContDraw(bool& quickDraw);
+	void reInitGrid();
+	void drawStatic(int& quickSteps);
+	
+	
+	Grid * grid;
+	int stepCounter;
+	int boxRadius;
+	ofParameter<int> quickSteps;
+	ofParameter<bool> quickDraw;
+	ofParameter<ofColor> drawColor;
+	ofParameter<ofColor> backgroundColor;
+	
+	ofxPanel gui;
 };

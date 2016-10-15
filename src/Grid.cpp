@@ -9,16 +9,21 @@
 #include "Grid.hpp"
 
 Grid::Grid(int width, int height) {
+	this->width = width;
+	this->height = height;
 	cells.assign(width*height, Cell());
 	Ant ant;
 	std::get<0>(ant) = UP;
 	int y = height / 2;
 	int x = width / 2;
 	std::get<1>(ant) = cells.begin() + y * width + x;
+	std::get<1>(ant)->hasAnt = true;
+	std::get<1>(ant)->isColored = true;
+	ants.push_back(ant);
 	
 }
 
-Grid::Ant Grid::goUp(Ant ant) {
+void Grid::goUp(Ant& ant) {
 	int index = std::get<1>(ant)- cells.begin();
 	if (index < width) {
 		throw outofBounds;
@@ -27,11 +32,10 @@ Grid::Ant Grid::goUp(Ant ant) {
 		std::get<1>(ant) -= width;
         std::get<1>(ant)->hasAnt = true;
 	}
-	return ant;
 	
 }
 
-Grid::Ant Grid::goDown(Ant ant) {
+void Grid::goDown(Ant& ant) {
 	int index = std::get<1>(ant) - cells.begin();
 	if (index > width * (height - 1)) {
 		throw outofBounds;
@@ -41,10 +45,9 @@ Grid::Ant Grid::goDown(Ant ant) {
         std::get<1>(ant)->hasAnt = true;
 		
 	}
-	return ant;
 }
 
-Grid::Ant Grid::goLeft(Ant ant) {
+void Grid::goLeft(Ant& ant) {
 	int index = std::get<1>(ant)- cells.begin();
 	if ((index % width) == 0) {
 		throw outofBounds;
@@ -53,11 +56,10 @@ Grid::Ant Grid::goLeft(Ant ant) {
 		std::get<1>(ant)--;
         std::get<1>(ant)->hasAnt = true;
 	}
-	return ant;
 	
 }
 
-Grid::Ant Grid::goRight(Ant ant) {
+void Grid::goRight(Ant& ant) {
 	int index = std::get<1>(ant)- cells.begin();
 	if (((index + 1) % width) == 0) {
 		throw outofBounds;
@@ -66,45 +68,44 @@ Grid::Ant Grid::goRight(Ant ant) {
 		std::get<1>(ant)++;
         std::get<1>(ant)->hasAnt = true;
 	}
-	return ant;
 	
 }
 void Grid::update(){
     for(auto&& a : ants){
-        if (std::get<1>(a)->isColored){
-            //left
-			std::get<0>(a) = turnLeft(std::get<0>(a));
-        } else {
-            //right
-            std::get<0>(a) = turnRight(std::get<0>(a));
-        }
-        //flip color of square
-        std::get<1>(a)->isColored =! std::get<1>(a)->isColored;
-        //move in that direction
-        try {
-            switch(std::get<0>(a)){
-			case LEFT:
-                goLeft(a);
-                break;
-			case UP:
-                goUp(a);
-                break;
-			case RIGHT:
-                goRight(a);
-                break;
-			case DOWN:
-                goDown(a);
-                break;
-            }
-        } catch (OutofBounds){
-            std::get<1>(a)->hasAnt = false;
-        }
-        
-        
+		if (std::get<1>(a)->hasAnt == true) {
+			if (std::get<1>(a)->isColored){
+				//left
+				std::get<0>(a) = turnLeft(std::get<0>(a));
+			} else {
+				//right
+				std::get<0>(a) = turnRight(std::get<0>(a));
+			}
+			//flip color of square
+			std::get<1>(a)->isColored =! std::get<1>(a)->isColored;
+			//move in that direction
+			try {
+				switch(std::get<0>(a)){
+					case LEFT:
+						goLeft(a);
+						break;
+					case UP:
+						goUp(a);
+						break;
+					case RIGHT:
+						goRight(a);
+						break;
+					case DOWN:
+						goDown(a);
+						break;
+				}
+			} catch (OutofBounds){
+				std::get<1>(a)->hasAnt = false;
+			}
+		}
     }
 }
 
-Direction Grid::turnRight(Direction d){
+Grid::Direction Grid::turnRight(Direction d){
 	switch(d) {
 		case LEFT:
 			return UP;
@@ -120,6 +121,10 @@ Direction Grid::turnRight(Direction d){
 			break;
 	}
 }
-Direction Grid::turnLeft(Direction d){
+Grid::Direction Grid::turnLeft(Direction d){
 	return turnRight(turnRight(turnRight(d)));
+}
+bool Grid::getBoxColored(int x, int y) {
+	auto cell = cells.begin() + y * width + x;
+	return cell->isColored;
 }
