@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 	
-	void drawBox(int x, int y, bool colored);
+	void drawBox(int x, int y, bool colored, bool hasAnt);
 	void toggleContDraw(bool& quickDraw);
 	void reInitGrid();
 	void drawStatic(int& quickSteps);
@@ -42,6 +42,7 @@ class ofApp : public ofBaseApp{
 	ofParameter<bool> quickDraw;
 	ofParameter<ofColor> drawColor;
 	ofParameter<ofColor> backgroundColor;
+    ofColor antColor = ofColor::blue;
 	
 	ofxPanel gui;
 };

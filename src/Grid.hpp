@@ -12,7 +12,7 @@
 #include <tuple>
 #include "cell.hpp"
 #include "OutofBoundsException.hpp"
-
+#include <iostream>
 
 class Grid {
 	
@@ -42,6 +42,8 @@ class Grid {
 public:
 	Grid(int width = 50, int height = 50);
 	void update();
+    void addAnt(int x, int y);
+    bool getBoxHasAnt(int x, int y);
 	bool getBoxColored(int x, int y);
 	
 	int width; // Number of Cells

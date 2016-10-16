@@ -13,12 +13,11 @@ void ofApp::setup(){
 	gui.add(quickSteps.set("Manual Step Count", 0, 0, 12000));
 	
 	gui.add(drawColor.set("Draw Color", ofColor::turquoise, ofColor::black, ofColor::white));
-	gui.add(backgroundColor.set("background Color", ofColor::black, ofColor::black, ofColor::white));
+	gui.add(backgroundColor.set("background Color", ofColor::white, ofColor::black, ofColor::white));
 	
 	gui.setShape(10, 10, gui.getShape().width + 30, gui.getShape().height);
 	gui.setWidthElements(230);
 	
-	ofSetBackgroundColor(ofColor::white);
 	
 	ofSetWindowTitle("Langston's Ant");
 	
@@ -35,11 +34,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    int antsamt = 0;
 	for (int x = 0; x< grid->width; x++) {
 		for (int y = 0; y < grid->height; y++) {
-			drawBox(x, y, grid->getBoxColored(x, y));
+			drawBox(x, y, grid->getBoxColored(x, y), grid->getBoxHasAnt(x, y));
+            if (grid->getBoxHasAnt(x, y)) antsamt++;
 		}
 	}
+    std::cout << "Cells which have hasAnt = true " << antsamt++ << endl;
 	gui.draw();
 	if (!quickDraw) {
 		ofSetColor(backgroundColor.get().getInverted());
@@ -101,10 +103,15 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
-void ofApp::drawBox(int x, int y, bool colored) {
-	if (colored) {
+void ofApp::drawBox(int x, int y, bool colored, bool hasAnt) {
+    if (hasAnt){
+        ofSetColor(antColor);
+    }
+    else if (colored) {
 		ofSetColor(drawColor);
-	} else ofSetColor(backgroundColor);
+	}
+    else ofSetColor(backgroundColor);
+    
 	ofDrawRectangle(x*boxRadius, y*boxRadius, boxRadius, boxRadius);
 }
 

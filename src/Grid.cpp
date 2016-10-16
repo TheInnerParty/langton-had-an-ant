@@ -59,6 +59,7 @@ void Grid::goLeft(Ant& ant) {
 	
 }
 
+
 void Grid::goRight(Ant& ant) {
 	int index = std::get<1>(ant)- cells.begin();
 	if (((index + 1) % width) == 0) {
@@ -71,6 +72,7 @@ void Grid::goRight(Ant& ant) {
 	
 }
 void Grid::update(){
+    std::cout << "Size of grid->ants vector " << ants.size() << std::endl;
     for(auto&& a : ants){
 		if (std::get<1>(a)->hasAnt == true) {
 			if (std::get<1>(a)->isColored){
@@ -127,4 +129,16 @@ Grid::Direction Grid::turnLeft(Direction d){
 bool Grid::getBoxColored(int x, int y) {
 	auto cell = cells.begin() + y * width + x;
 	return cell->isColored;
+}
+
+bool Grid::getBoxHasAnt(int x, int y) {
+    auto cell = cells.begin() + y * width * x;
+    return cell->hasAnt;
+}
+void Grid::addAnt(int x, int y){
+    Ant ant;
+    std::get<0>(ant) = UP;
+    std::get<1>(ant) = cells.begin() + y * width + x;
+    std::get<1>(ant)->isColored = true;
+    ants.push_back(ant);
 }
