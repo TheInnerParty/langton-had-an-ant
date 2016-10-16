@@ -12,8 +12,8 @@ void ofApp::setup(){
 	quickSteps.addListener(this, &ofApp::drawStatic);
 	gui.add(quickSteps.set("Manual Step Count", 0, 0, 12000));
 	
-	gui.add(drawColor.set("Draw Color", ofColor::lightBlue, ofColor::black, ofColor::white));
-	gui.add(backgroundColor.set("background Color", ofColor::white, ofColor::black, ofColor::white));
+	gui.add(drawColor.set("Draw Color", ofColor::turquoise, ofColor::black, ofColor::white));
+	gui.add(backgroundColor.set("background Color", ofColor::black, ofColor::black, ofColor::white));
 	
 	gui.setShape(10, 10, gui.getShape().width + 30, gui.getShape().height);
 	gui.setWidthElements(230);
@@ -42,7 +42,7 @@ void ofApp::draw(){
 	}
 	gui.draw();
 	if (!quickDraw) {
-		ofSetColor(ofColor::black);
+		ofSetColor(backgroundColor.get().getInverted());
 		ofDrawBitmapString("Steps: " + std::to_string(stepCounter), ofGetWidth() - 100, 50);
 	}
 }
