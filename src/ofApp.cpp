@@ -49,7 +49,9 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == 's') {
+		stackTrace();
+	}
 }
 
 //--------------------------------------------------------------
@@ -129,4 +131,8 @@ void ofApp::drawStatic(int& quickSteps) {
 	}
 	
 	
+}
+
+void ofApp::stackTrace() {
+	int result = 1+1;
 }

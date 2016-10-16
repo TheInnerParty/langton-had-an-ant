@@ -34,6 +34,8 @@ class ofApp : public ofBaseApp{
 	void reInitGrid();
 	void drawStatic(int& quickSteps);
 	
+	void stackTrace();
+	
 	
 	Grid * grid;
 	int stepCounter;
