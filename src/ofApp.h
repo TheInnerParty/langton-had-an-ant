@@ -36,8 +36,9 @@ class ofApp : public ofBaseApp{
 	void drawStatic(int& quickSteps);
 	
 	void stackTrace();
-	
-	
+    
+	//stores the tile location of the mouse
+    std::tuple<int,int> mouseLoc = std::tuple<int,int>(0,0);
 	Grid * grid;
 	int stepCounter;
 	int boxRadius;
@@ -48,4 +49,5 @@ class ofApp : public ofBaseApp{
     ofColor antColor = ofColor::black;
     ofColor tileColor = ofColor::white;
 	ofxPanel gui;
+    bool enableGUI = false;
 };

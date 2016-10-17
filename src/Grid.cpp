@@ -27,6 +27,7 @@ void Grid::addAnt(int x, int y){
     std::get<0>(ant) = UP;
     std::get<1>(ant) = cells.begin() + y * width + x;
     std::get<1>(ant)->hasAnt = true;
+    ants.push_back(ant);
 }
 
 void Grid::goUp(Ant& ant) {
@@ -77,37 +78,40 @@ void Grid::goRight(Ant& ant) {
 	
 }
 void Grid::update(){
-    for(auto&& a : ants){
-		if (std::get<1>(a)->hasAnt == true) {
-			if (std::get<1>(a)->isColored){
-				//left
-				std::get<0>(a) = turnLeft(std::get<0>(a));
-			} else {
-				//right
-				std::get<0>(a) = turnRight(std::get<0>(a));
-			}
-			//flip color of square
-			std::get<1>(a)->isColored =! std::get<1>(a)->isColored;
-			//move in that direction
-			try {
-				switch(std::get<0>(a)){
-					case LEFT:
-						goLeft(a);
-						break;
-					case UP:
-						goUp(a);
-						break;
-					case RIGHT:
-						goRight(a);
-						break;
-					case DOWN:
-						goDown(a);
-						break;
-				}
-			} catch (OutofBounds){
-				std::get<1>(a)->hasAnt = false;
-			}
-		}
+    auto a = ants.begin();
+    while (a < ants.end()){
+        if (std::get<1>(*a)->hasAnt == true) {
+            if (std::get<1>(*a)->isColored){
+                //left
+                std::get<0>(*a) = turnLeft(std::get<0>(*a));
+            } else {
+                //right
+                std::get<0>(*a) = turnRight(std::get<0>(*a));
+            }
+            //flip color of square
+            std::get<1>(*a)->isColored =! std::get<1>(*a)->isColored;
+            //move in that direction
+            try {
+                switch(std::get<0>(*a)){
+                    case LEFT:
+                        goLeft(*a);
+                        break;
+                    case UP:
+                        goUp(*a);
+                        break;
+                    case RIGHT:
+                        goRight(*a);
+                        break;
+                    case DOWN:
+                        goDown(*a);
+                        break;
+                }
+            } catch (OutofBounds){
+                std::get<1>(*a)->hasAnt = false;
+            }
+        }
+        
+        if (! std::get<1>(*a)->hasAnt){ ants.erase(a++);} else a++;
     }
 }
 
