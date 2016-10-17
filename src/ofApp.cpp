@@ -18,7 +18,7 @@ void ofApp::setup(){
 	gui.setShape(10, 10, gui.getShape().width + 30, gui.getShape().height);
 	gui.setWidthElements(230);
 	
-	ofSetBackgroundColor(ofColor::white);
+	ofSetBackgroundColor(ofColor::black);
 	
 	ofSetWindowTitle("Langston's Ant");
 	
@@ -40,6 +40,9 @@ void ofApp::draw(){
 			drawBox(x, y, grid->getBoxColored(x, y));
 		}
 	}
+    for (auto&& ant : grid->ants){
+        drawAnt(grid->getAntLocation(ant));
+    }
 	gui.draw();
 	if (!quickDraw) {
 		ofSetColor(backgroundColor.get().getInverted());
@@ -49,9 +52,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == 's') {
-		stackTrace();
-	}
 }
 
 //--------------------------------------------------------------
@@ -106,9 +106,14 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 void ofApp::drawBox(int x, int y, bool colored) {
 	if (colored) {
 		ofSetColor(drawColor);
-	} else ofSetColor(backgroundColor);
+	} else ofSetColor(tileColor);
 	ofDrawRectangle(x*boxRadius, y*boxRadius, boxRadius, boxRadius);
 }
+void ofApp::drawAnt(std::tuple<int,int> loc){
+    ofSetColor(antColor);
+    ofDrawRectangle(std::get<0>(loc)*boxRadius, std::get<1>(loc)*boxRadius, boxRadius, boxRadius);
+}
+
 
 void ofApp::toggleContDraw(bool& quickDraw) {
 	reInitGrid();

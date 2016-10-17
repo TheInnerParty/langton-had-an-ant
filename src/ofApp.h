@@ -30,6 +30,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 	
 	void drawBox(int x, int y, bool colored);
+    void drawAnt(std::tuple<int,int> loc);
 	void toggleContDraw(bool& quickDraw);
 	void reInitGrid();
 	void drawStatic(int& quickSteps);
@@ -44,6 +45,7 @@ class ofApp : public ofBaseApp{
 	ofParameter<bool> quickDraw;
 	ofParameter<ofColor> drawColor;
 	ofParameter<ofColor> backgroundColor;
-	
+    ofColor antColor = ofColor::black;
+    ofColor tileColor = ofColor::white;
 	ofxPanel gui;
 };

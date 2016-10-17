@@ -22,6 +22,12 @@ Grid::Grid(int width, int height) {
 	ants.push_back(ant);
 	
 }
+void Grid::addAnt(int x, int y){
+    Ant ant;
+    std::get<0>(ant) = UP;
+    std::get<1>(ant) = cells.begin() + y * width + x;
+    std::get<1>(ant)->hasAnt = true;
+}
 
 void Grid::goUp(Ant& ant) {
 	int index = std::get<1>(ant)- cells.begin();
@@ -128,3 +134,16 @@ bool Grid::getBoxColored(int x, int y) {
 	auto cell = cells.begin() + y * width + x;
 	return cell->isColored;
 }
+
+std::tuple<int,int> Grid::getAntLocation(Ant a){
+    auto cell = std::get<1>(a);
+    int index = cell - cells.begin();
+    int y = 0;
+    
+    while ((y+1)*width < index){
+        y+=1;
+    }
+    int x = index - (y)*width;
+    return std::tuple<int,int>(x,y);
+}
+

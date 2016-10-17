@@ -22,10 +22,6 @@ class Grid {
 	
 	typedef std::tuple<Direction, std::vector<Cell>::iterator> Ant;
 	
-	std::vector<Ant> ants;
-	
-	
-	
 	
 	void goUp(Ant& ant);
 	void goDown(Ant& ant);
@@ -43,7 +39,9 @@ public:
 	Grid(int width = 50, int height = 50);
 	void update();
 	bool getBoxColored(int x, int y);
-	
+	std::vector<Ant> ants;
 	int width; // Number of Cells
 	int height;
+    std::tuple<int,int> getAntLocation(Ant a);
+    void addAnt(int x, int y);
 };
