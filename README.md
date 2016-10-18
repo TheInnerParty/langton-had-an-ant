@@ -1,5 +1,5 @@
-# Langston Had an Ant
-An implementation of <a href="https://en.wikipedia.org/wiki/Langton%27s_ant">Langston's ant</a> built with openFrameworks. Supports custom colors and manual step control.
+# Langton Had an Ant
+An implementation of <a href="https://en.wikipedia.org/wiki/Langton%27s_ant">Langton's ant</a> built with openFrameworks. Supports custom colors and manual step control.
 
 ## Gallery
 ![](gallery/image1.png)<br>
