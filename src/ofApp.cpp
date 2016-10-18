@@ -20,7 +20,7 @@ void ofApp::setup(){
 	
 	ofSetBackgroundColor(ofColor::black);
 	
-	ofSetWindowTitle("Langston's Ant");
+	ofSetWindowTitle("Langton's Ant");
 }
 
 //--------------------------------------------------------------
